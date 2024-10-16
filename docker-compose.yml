@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 8077
+      POSTGRES_DB: loyihadb
+    ports:
+      - "5432:5432"
+
+  nest-app:
+    image: ibodullayevhusernamedocker/nest-app
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 8077
+      DATABASE_NAME: loyihadb
